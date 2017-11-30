@@ -153,6 +153,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ubuntu16.04配置Samba服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Ubuntu-16-04-配置Samba服务器"><a href="#Ubuntu-16-04-配置Samba服务器" class="headerlink" title="Ubuntu 16.04 配置Samba服务器"></a>Ubuntu 16.04 配置Samba服务器</h1><p>Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享</p>
+<h4 id="现在介绍如何在ubuntu-16-04系统中搭建Samba服务。"><a href="#现在介绍如何在ubuntu-16-04系统中搭建Samba服务。" class="headerlink" title="现在介绍如何在ubuntu 16.04系统中搭建Samba服务。"></a>现在介绍如何在ubuntu 16.04系统中搭建Samba服务。</h4><ol>
+<li>Samba服务器的安装</li>
+</ol>
+<ul>
+<li><p>使用命令查看是否安装Samba服务器 </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l samba</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装Samba </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install samba</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装smbclient </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install smbclient</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>修改Samba配置文件</li>
+</ol>
+<ul>
+<li><p>备份Samba配置文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/samba/smb.conf /etc/samba/smb.conf .bak</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用vim或者gedit 编辑smb.conf文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在smb.conf文件末尾加上</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[share]</span><br><span class="line">comment = Shared Folder require password</span><br><span class="line">path = /home/share</span><br><span class="line">public = yes</span><br><span class="line">writable = yes</span><br><span class="line">valid users = share</span><br><span class="line">create mask = 0777</span><br><span class="line">directory mask = 0777</span><br><span class="line">force user = nobody</span><br><span class="line">force group = nogroup</span><br><span class="line">available = yes</span><br><span class="line">browseable = yes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启Samba服务</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	sudo /etc/init.d/samba restart</span><br><span class="line">	```  </span><br><span class="line">3. 设置登陆Samba的用户和密码</span><br><span class="line">* 创建用户</span><br></pre></td></tr></table></figure>
+<p>  sudo adduser  share<br>  正在添加用户”share”<br>  正在添加新组”share” (1004)…<br>  正在添加新用户”share” (1003) 到组”share”…<br>  创建主目录”/home/share”…<br>  正在从”/etc/skel”复制文件…<br>  输入新的 UNIX 密码:<br>  重新输入新的 UNIX 密码：<br>  passwd：已成功更新密码<br>  正在改变 share 的用户信息<br>  请输入新值，或直接敲回车键以使用默认值</p>
+<pre><code>全名 []: share
+房间号码 []: 
+工作电话 []: 
+家庭电话 []: 
+其它 []: 
+</code></pre><p>  这些信息是否正确？ [Y/n] y</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 将用户添加进Samba服务器列表中（必须保证用户存在）</span><br></pre></td></tr></table></figure>
+<p>  sudo smbpasswd -a share     &lt;– 该用户必须存在<br>  New SMB password:              &lt;– 登录Samba服务的密码<br>  Retype new SMB password:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 创建用户共享目录并更改权限</span><br><span class="line">	* 如果共享目录不存在就创建</span><br></pre></td></tr></table></figure>
+<p>  sudo mkdir /home/share</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 设置共享目录的权限为755</span><br></pre></td></tr></table></figure>
+<p>  sudo chmod 755 share<br>  ```</p>
+</li>
+</ul>
+<ol>
+<li>window下访问</li>
+</ol>
+<ul>
+<li>在文件资源管理器中输入Ubuntu的Ip地址如：\192.168.110.128，按提示输入对应的Samba账号密码即可</li>
+<li>win10用户如果出现无法访问Samba服务器时，请在组策略中将‘启用不安全的来宾登录’启用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-14-24.jpg" alt="23-14-24"></p>
+<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-16-59.jpg" alt="23-16-59"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/30/ubuntu16.04配置Samba服务器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
