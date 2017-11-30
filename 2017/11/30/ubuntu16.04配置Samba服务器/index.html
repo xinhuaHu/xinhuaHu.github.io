@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/11 | xinhuaHu的网站</title>
+  <title>xinhuaHu的网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Ubuntu 16.04 配置Samba服务器Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享 现在介绍如何在ubuntu 16.04系统中搭建Samba服务。 Samba服务器的安装   使用命令查看是否安装">
+<meta property="og:type" content="article">
 <meta property="og:title" content="xinhuaHu的网站">
-<meta property="og:url" content="http://yoursite.com/archives/2017/11/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/11/30/ubuntu16.04配置Samba服务器/index.html">
 <meta property="og:site_name" content="xinhuaHu的网站">
+<meta property="og:description" content="Ubuntu 16.04 配置Samba服务器Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享 现在介绍如何在ubuntu 16.04系统中搭建Samba服务。 Samba服务器的安装   使用命令查看是否安装Samba服务器  1dpkg -l samba  安装Samba  1sudo">
+<meta property="og:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-14-24.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-16-59.jpg">
+<meta property="og:updated_time" content="2017-11-30T15:36:01.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xinhuaHu的网站">
+<meta name="twitter:description" content="Ubuntu 16.04 配置Samba服务器Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享 现在介绍如何在ubuntu 16.04系统中搭建Samba服务。 Samba服务器的安装   使用命令查看是否安装Samba服务器  1dpkg -l samba  安装Samba  1sudo">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-14-24.jpg">
   
     <link rel="alternative" href="/atom.xml" title="xinhuaHu的网站" type="application/atom+xml">
   
@@ -151,70 +158,178 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-ubuntu16.04配置Samba服务器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Ubuntu-16-04-配置Samba服务器"><a href="#Ubuntu-16-04-配置Samba服务器" class="headerlink" title="Ubuntu 16.04 配置Samba服务器"></a>Ubuntu 16.04 配置Samba服务器</h1><p>Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享</p>
+<h4 id="现在介绍如何在ubuntu-16-04系统中搭建Samba服务。"><a href="#现在介绍如何在ubuntu-16-04系统中搭建Samba服务。" class="headerlink" title="现在介绍如何在ubuntu 16.04系统中搭建Samba服务。"></a>现在介绍如何在ubuntu 16.04系统中搭建Samba服务。</h4><ol>
+<li>Samba服务器的安装</li>
+</ol>
+<ul>
+<li><p>使用命令查看是否安装Samba服务器 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l samba</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装Samba </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install samba</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装smbclient </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install smbclient</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>修改Samba配置文件</li>
+</ol>
+<ul>
+<li><p>备份Samba配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/samba/smb.conf /etc/samba/smb.conf .bak</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用vim或者gedit 编辑smb.conf文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在smb.conf文件末尾加上</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[share]</span><br><span class="line">comment = Shared Folder require password</span><br><span class="line">path = /home/share</span><br><span class="line">public = yes</span><br><span class="line">writable = yes</span><br><span class="line">valid users = share</span><br><span class="line">create mask = 0777</span><br><span class="line">directory mask = 0777</span><br><span class="line">force user = nobody</span><br><span class="line">force group = nogroup</span><br><span class="line">available = yes</span><br><span class="line">browseable = yes</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启Samba服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/samba restart</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>设置登陆Samba的用户和密码</li>
+</ol>
+<ul>
+<li><p>创建用户 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser  share</span><br><span class="line">正在添加用户&quot;share&quot;</span><br><span class="line">正在添加新组&quot;share&quot; (1004)...</span><br><span class="line">正在添加新用户&quot;share&quot; (1003) 到组&quot;share&quot;...</span><br><span class="line">创建主目录&quot;/home/share&quot;...</span><br><span class="line">正在从&quot;/etc/skel&quot;复制文件...</span><br><span class="line">输入新的 UNIX 密码:</span><br><span class="line">重新输入新的 UNIX 密码： </span><br><span class="line">	passwd：已成功更新密码</span><br><span class="line">	正在改变 share 的用户信息</span><br><span class="line">	请输入新值，或直接敲回车键以使用默认值</span><br><span class="line">	全名 []: share</span><br><span class="line">	房间号码 []: </span><br><span class="line">	工作电话 []: </span><br><span class="line">	家庭电话 []: </span><br><span class="line">	其它 []: </span><br><span class="line">这些信息是否正确？ [Y/n] y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将用户添加进Samba服务器列表中（必须保证用户存在）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo smbpasswd -a share     &lt;-- 该用户必须存在</span><br><span class="line">New SMB password:              &lt;-- 登录Samba服务的密码</span><br><span class="line">Retype new SMB password:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建用户共享目录并更改权限</p>
+<ul>
+<li>如果共享目录不存在就创建，并将共享目录的权限设置为755<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /home/share</span><br><span class="line">sudo chmod 755 share</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>window下访问</li>
+</ol>
+<ul>
+<li>在文件资源管理器中输入Ubuntu的Ip地址如：\192.168.110.128，按提示输入对应的Samba账号密码即可</li>
+<li>win10用户如果出现无法访问Samba服务器时，请在组策略中将‘启用不安全的来宾登录’启用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-14-24.jpg" alt="23-14-24"></p>
+<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-16-59.jpg" alt="23-16-59"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/30/ubuntu16.04配置Samba服务器/" class="archive-article-date">
-  	<time datetime="2017-11-30T15:33:00.094Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/30/ubuntu16.04配置Samba服务器/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/30/hello-world/" class="archive-article-date">
-  	<time datetime="2017-11-30T13:10:19.911Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/30/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -237,8 +352,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
