@@ -16,7 +16,7 @@
 <meta property="og:description" content="Ubuntu 16.04 配置Samba服务器Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享 现在介绍如何在ubuntu 16.04系统中搭建Samba服务。 Samba服务器的安装   使用命令查看是否安装Samba服务器    1dpkg -l samba  安装Samba    1">
 <meta property="og:image" content="http://yoursite.com/2017/11/30/ubuntu16.04配置Samba服务器/23-14-24.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/11/30/ubuntu16.04配置Samba服务器/23-16-59.jpg">
-<meta property="og:updated_time" content="2017-11-30T11:26:54.176Z">
+<meta property="og:updated_time" content="2017-11-30T14:55:35.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xinhuaHu的网站">
 <meta name="twitter:description" content="Ubuntu 16.04 配置Samba服务器Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享 现在介绍如何在ubuntu 16.04系统中搭建Samba服务。 Samba服务器的安装   使用命令查看是否安装Samba服务器    1dpkg -l samba  安装Samba    1">
@@ -193,28 +193,16 @@
 </li>
 <li><p>重启Samba服务</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	sudo /etc/init.d/samba restart</span><br><span class="line">	```  </span><br><span class="line">3. 设置登陆Samba的用户和密码</span><br><span class="line">* 创建用户</span><br></pre></td></tr></table></figure>
-<p>  sudo adduser  share</p>
-<pre><code>正在添加用户&quot;share&quot;
-正在添加新组&quot;share&quot; (1004)...
-正在添加新用户&quot;share&quot; (1003) 到组&quot;share&quot;...
-创建主目录&quot;/home/share&quot;...
-正在从&quot;/etc/skel&quot;复制文件...
-输入新的 UNIX 密码:
-重新输入新的 UNIX 密码： 
-passwd：已成功更新密码
-正在改变 share 的用户信息
-请输入新值，或直接敲回车键以使用默认值
-    全名 []: share
-    房间号码 []: 
-    工作电话 []: 
-    家庭电话 []: 
-    其它 []: 
-这些信息是否正确？ [Y/n] y
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 将用户添加进Samba服务器列表中（必须保证用户存在）</span><br></pre></td></tr></table></figure>
-<p>  sudo smbpasswd -a share     &lt;– 该用户必须存在</p>
-<pre><code>New SMB password:              &lt;-- 登录Samba服务的密码
-Retype new SMB password:
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 创建用户共享目录并更改权限</span><br><span class="line">	* 如果共享目录不存在就创建</span><br></pre></td></tr></table></figure>
+<p>  sudo adduser  share<br>  正在添加用户”share”<br>  正在添加新组”share” (1004)…<br>  正在添加新用户”share” (1003) 到组”share”…<br>  创建主目录”/home/share”…<br>  正在从”/etc/skel”复制文件…<br>  输入新的 UNIX 密码:<br>  重新输入新的 UNIX 密码：<br>  passwd：已成功更新密码<br>  正在改变 share 的用户信息<br>  请输入新值，或直接敲回车键以使用默认值</p>
+<pre><code>全名 []: share
+房间号码 []: 
+工作电话 []: 
+家庭电话 []: 
+其它 []: 
+</code></pre><p>  这些信息是否正确？ [Y/n] y</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 将用户添加进Samba服务器列表中（必须保证用户存在）</span><br></pre></td></tr></table></figure>
+<p>  sudo smbpasswd -a share     &lt;– 该用户必须存在<br>  New SMB password:              &lt;– 登录Samba服务的密码<br>  Retype new SMB password:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 创建用户共享目录并更改权限</span><br><span class="line">	* 如果共享目录不存在就创建</span><br></pre></td></tr></table></figure>
 <p>  sudo mkdir /home/share</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 设置共享目录的权限为755</span><br></pre></td></tr></table></figure>
 <p>  sudo chmod 755 share<br>  ```</p>
