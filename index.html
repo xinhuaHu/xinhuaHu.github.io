@@ -173,66 +173,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Ubuntu-16-04-配置Samba服务器"><a href="#Ubuntu-16-04-配置Samba服务器" class="headerlink" title="Ubuntu 16.04 配置Samba服务器"></a>Ubuntu 16.04 配置Samba服务器</h1><p>Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享</p>
-<h4 id="现在介绍如何在ubuntu-16-04系统中搭建Samba服务。"><a href="#现在介绍如何在ubuntu-16-04系统中搭建Samba服务。" class="headerlink" title="现在介绍如何在ubuntu 16.04系统中搭建Samba服务。"></a>现在介绍如何在ubuntu 16.04系统中搭建Samba服务。</h4><ol>
-<li>Samba服务器的安装</li>
-</ol>
-<ul>
-<li><p>使用命令查看是否安装Samba服务器 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l samba</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装Samba </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install samba</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装smbclient </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install smbclient</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li>修改Samba配置文件</li>
-</ol>
-<ul>
-<li><p>备份Samba配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/samba/smb.conf /etc/samba/smb.conf .bak</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用vim或者gedit 编辑smb.conf文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在smb.conf文件末尾加上</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[share]</span><br><span class="line">comment = Shared Folder require password</span><br><span class="line">path = /home/share</span><br><span class="line">public = yes</span><br><span class="line">writable = yes</span><br><span class="line">valid users = share</span><br><span class="line">create mask = 0777</span><br><span class="line">directory mask = 0777</span><br><span class="line">force user = nobody</span><br><span class="line">force group = nogroup</span><br><span class="line">available = yes</span><br><span class="line">browseable = yes</span><br></pre></td></tr></table></figure>
-<ul>
-<li>重启Samba服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/samba restart</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li>设置登陆Samba的用户和密码</li>
-</ol>
-<ul>
-<li><p>创建用户 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser  share</span><br><span class="line">正在添加用户&quot;share&quot;</span><br><span class="line">正在添加新组&quot;share&quot; (1004)...</span><br><span class="line">正在添加新用户&quot;share&quot; (1003) 到组&quot;share&quot;...</span><br><span class="line">创建主目录&quot;/home/share&quot;...</span><br><span class="line">正在从&quot;/etc/skel&quot;复制文件...</span><br><span class="line">输入新的 UNIX 密码:</span><br><span class="line">重新输入新的 UNIX 密码： </span><br><span class="line">	passwd：已成功更新密码</span><br><span class="line">	正在改变 share 的用户信息</span><br><span class="line">	请输入新值，或直接敲回车键以使用默认值</span><br><span class="line">	全名 []: share</span><br><span class="line">	房间号码 []: </span><br><span class="line">	工作电话 []: </span><br><span class="line">	家庭电话 []: </span><br><span class="line">	其它 []: </span><br><span class="line">这些信息是否正确？ [Y/n] y</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将用户添加进Samba服务器列表中（必须保证用户存在）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo smbpasswd -a share     &lt;-- 该用户必须存在</span><br><span class="line">New SMB password:              &lt;-- 登录Samba服务的密码</span><br><span class="line">Retype new SMB password:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建用户共享目录并更改权限</p>
-<ul>
-<li>如果共享目录不存在就创建，并将共享目录的权限设置为755<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /home/share</span><br><span class="line">sudo chmod 755 share</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>window下访问</li>
-</ol>
-<ul>
-<li>在文件资源管理器中输入Ubuntu的Ip地址如：\192.168.110.128，按提示输入对应的Samba账号密码即可</li>
-<li>win10用户如果出现无法访问Samba服务器时，请在组策略中将‘启用不安全的来宾登录’启用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-14-24.jpg" alt="23-14-24"></p>
-<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/23-16-59.jpg" alt="23-16-59"></p>
-
+        <p>Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享</p>
+        
       
 
       
@@ -294,16 +236,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br>
+        
       
 
       
