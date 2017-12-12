@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/12/12/Ubuntu16-04 MySql的安装和常用操作/index.html">
 <meta property="og:site_name" content="xinhuaHu的网站">
 <meta property="og:description" content="这是一篇用来整理在Ubuntu16.04环境下MySql的安装和常用操作的记录，也可以说是备忘录。因为说不定哪天又用到了，到时再去查很是浪费时间，都说好记性不如烂笔头，在整理记录的过程中也有助于自己学习一些和记下一些东西，加深自己的记忆。">
-<meta property="og:updated_time" content="2017-12-12T12:49:56.792Z">
+<meta property="og:updated_time" content="2017-12-12T12:52:16.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu16.04 MySql的安装和常用操作">
 <meta name="twitter:description" content="这是一篇用来整理在Ubuntu16.04环境下MySql的安装和常用操作的记录，也可以说是备忘录。因为说不定哪天又用到了，到时再去查很是浪费时间，都说好记性不如烂笔头，在整理记录的过程中也有助于自己学习一些和记下一些东西，加深自己的记忆。">
@@ -192,23 +192,23 @@ mysql -h localhost -u root -p
 <p>  service mysql start</p>
 </li>
 <li><p>2、mysql脚本启动</p>
-<p>  /etc/inint.d/mysql start</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/inint.d/mysql start</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="2-停止"><a href="#2-停止" class="headerlink" title="2. 停止"></a>2. 停止</h4><ul>
 <li><p>1、服务停止</p>
-<p>  service mysql stop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>2、mysql脚本停止</p>
-<p>  /etc/inint.d/mysql stop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/inint.d/mysql stop</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="3-重启"><a href="#3-重启" class="headerlink" title="3. 重启"></a>3. 重启</h4><ul>
 <li><p>1、服务重启</p>
-<p>  service mysql restart</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>2、mysql脚本重启</p>
-<p>  /etc/inint.d/mysql restart</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/inint.d/mysql restart</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="导入和导出"><a href="#导入和导出" class="headerlink" title="导入和导出"></a>导入和导出</h3><h4 id="1-导出整个数据库"><a href="#1-导出整个数据库" class="headerlink" title="1. 导出整个数据库"></a>1. 导出整个数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名</span><br><span class="line">mysqldump -u user_name -p dbname&gt; file.sql</span><br></pre></td></tr></table></figure>
