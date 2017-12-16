@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>tags | xinhuaHu的网站</title>
+  <title>Ubuntu 16.04配置Samba服务器 | xinhuaHu的网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+  <meta name="description" content="Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 16.04配置Samba服务器">
+<meta property="og:url" content="http://yoursite.com/2017/11/30/Ubuntu-16-04配置Samba服务器/index.html">
 <meta property="og:site_name" content="xinhuaHu的网站">
-<meta property="og:updated_time" content="2017-12-03T03:09:32.105Z">
+<meta property="og:description" content="Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享">
+<meta property="og:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/xunl/23-14-24.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/xunl/23-16-59.jpg">
+<meta property="og:updated_time" content="2017-12-16T02:56:24.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="Ubuntu 16.04配置Samba服务器">
+<meta name="twitter:description" content="Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/xunl/23-14-24.jpg">
   
     <link rel="alternative" href="/atom.xml" title="xinhuaHu的网站" type="application/atom+xml">
   
@@ -152,27 +159,87 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-Ubuntu-16-04配置Samba服务器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      tags
+      Ubuntu 16.04配置Samba服务器
     </h1>
   
 
         
-        <a href="/tags/index.html" class="archive-article-date">
-  	<time datetime="2017-12-03T03:08:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
+        <a href="/2017/11/30/Ubuntu-16-04配置Samba服务器/" class="archive-article-date">
+  	<time datetime="2017-11-30T15:24:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Samba是SMB的一种实现方法，主要用来实现Linux系统的文件和打印服务。Linux用户通过配置使用Samba服务器可以实现与Windows用户的资源共享</p>
+<a id="more"></a>
+<h4 id="现在介绍如何在ubuntu-16-04系统中搭建Samba服务。"><a href="#现在介绍如何在ubuntu-16-04系统中搭建Samba服务。" class="headerlink" title="现在介绍如何在ubuntu 16.04系统中搭建Samba服务。"></a>现在介绍如何在ubuntu 16.04系统中搭建Samba服务。</h4><ol>
+<li>Samba服务器的安装</li>
+</ol>
+<ul>
+<li><p>使用命令查看是否安装Samba服务器 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l samba</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装Samba </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install samba</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装smbclient </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install smbclient</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>修改Samba配置文件</li>
+</ol>
+<ul>
+<li><p>备份Samba配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/samba/smb.conf /etc/samba/smb.conf .bak</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用vim或者gedit 编辑smb.conf文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在smb.conf文件末尾加上</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[share]</span><br><span class="line">comment = Shared Folder require password</span><br><span class="line">path = /home/share</span><br><span class="line">public = yes</span><br><span class="line">writable = yes</span><br><span class="line">valid users = share</span><br><span class="line">create mask = 0777</span><br><span class="line">directory mask = 0777</span><br><span class="line">force user = nobody</span><br><span class="line">force group = nogroup</span><br><span class="line">available = yes</span><br><span class="line">browseable = yes</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启Samba服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/samba restart</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>设置登陆Samba的用户和密码</li>
+</ol>
+<ul>
+<li><p>创建用户 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser  share</span><br><span class="line">正在添加用户&quot;share&quot;</span><br><span class="line">正在添加新组&quot;share&quot; (1004)...</span><br><span class="line">正在添加新用户&quot;share&quot; (1003) 到组&quot;share&quot;...</span><br><span class="line">创建主目录&quot;/home/share&quot;...</span><br><span class="line">正在从&quot;/etc/skel&quot;复制文件...</span><br><span class="line">输入新的 UNIX 密码:</span><br><span class="line">重新输入新的 UNIX 密码： </span><br><span class="line">	passwd：已成功更新密码</span><br><span class="line">	正在改变 share 的用户信息</span><br><span class="line">	请输入新值，或直接敲回车键以使用默认值</span><br><span class="line">	全名 []: share</span><br><span class="line">	房间号码 []: </span><br><span class="line">	工作电话 []: </span><br><span class="line">	家庭电话 []: </span><br><span class="line">	其它 []: </span><br><span class="line">这些信息是否正确？ [Y/n] y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将用户添加进Samba服务器列表中（必须保证用户存在）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo smbpasswd -a share     &lt;-- 该用户必须存在</span><br><span class="line">New SMB password:              &lt;-- 登录Samba服务的密码</span><br><span class="line">Retype new SMB password:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建用户共享目录并更改权限</p>
+<ul>
+<li>如果共享目录不存在就创建，并将共享目录的权限设置为755<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /home/share</span><br><span class="line">sudo chmod 755 share</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>window下访问</li>
+</ol>
+<ul>
+<li>在文件资源管理器中输入Ubuntu的Ip地址如：\192.168.110.128，按提示输入对应的Samba账号密码即可</li>
+<li>win10用户如果出现无法访问Samba服务器时，请在组策略中将‘启用不安全的来宾登录’启用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/xunl/23-14-24.jpg" alt="23-14-24"></p>
+<p><img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/xunl/23-16-59.jpg" alt="23-16-59"></p>
+
       
 
       
@@ -180,6 +247,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -230,7 +308,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/tags/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/30/Ubuntu-16-04配置Samba服务器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -242,6 +320,20 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2017/12/01/迅雷下载百度云文件/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          迅雷下载百度云文件
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -267,8 +359,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/tags/index.html", 
-    sourceId: "",
+    url: "http://yoursite.com/2017/11/30/Ubuntu-16-04配置Samba服务器/", 
+    sourceId: "Ubuntu-16-04配置Samba服务器",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -303,7 +395,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
