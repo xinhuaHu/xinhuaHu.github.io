@@ -173,35 +173,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<p>什么是跨域</p>
-<p>概念：只要协议、域名、端口有任何一个不同，都被当作是不同的域。而跨域是指从一个域名的网页去请求另一个域名的资源。例如从<code>www.baidu.com</code>页面请求<code>www.bing.com</code>的资源就被视为跨域。而因为浏览器的同源策略，会对跨域请求进行限制于是就有了跨域问题的出现。同源，指的是协议、域名、端口号都必须完全相同</p>
-<p>跨域的处理</p>
-<ul>
-<li><font color="red">方法一：服务器代理</font>
-
-<p>  因为限制只存在于浏览器中，在其他环境下是不存在的，服务器中中自然也不存在，所以只需要在服务器做好请求代理，请求变成同源的自然就不存在问题了。</p>
-</li>
-<li><font color="red">方法二：jsonp</font>
-
-<p>  虽然浏览器有同源限制，但是有三个标签是不符合这种限制的<code>&lt;img&gt;</code>的src（获取图片），<code>&lt;link&gt;</code>的href（获取css），<code>&lt;script&gt;</code>的src（获取javascript），这是由他们的自身特性所决定的。而jsonp，就是利用了script标签不限制同源的特点来实现的。</p>
-<p>  小例子：百度搜索框(边输入边提示)效果    &darr;    &darr;    &darr;</p>
-<p>  <img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/search.jpg" alt="百度搜索"></p>
-<p>  布局</p>
-<p>  只需要一个<code>ul</code>即可，其他全部通过代码动态添加</p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"input"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>  js代码</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">           <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line">           <span class="keyword">var</span> html = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> (data.s.length) &#123;</span><br><span class="line">               list.style.display = <span class="string">'block'</span>;</span><br><span class="line">               <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.s.length; i++) &#123;</span><br><span class="line">                   html += <span class="string">'&lt;li&gt;'</span> + data.s[i] + <span class="string">'&lt;/li&gt;'</span></span><br><span class="line">               &#125;</span><br><span class="line">               list.innerHTML = html;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'input'</span>);</span><br><span class="line">           <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line"></span><br><span class="line">           input.onkeyup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">//判断输入框不为空时创建script标签，并把请求的接口文件写入src</span></span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">''</span>) &#123;</span><br><span class="line">                   <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">                   script.src = <span class="string">'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='</span> + input.value + <span class="string">'&amp;cb=fn'</span>;</span><br><span class="line">                   <span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   list.style.display = <span class="string">'none'</span></span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-<p>  效果&darr;    &darr;    &darr;</p>
-<p>  <img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/xiaog.png" alt="最终效果"></p>
-<p>  jsonp是一种常用的跨域方式，目前有很多前端的jsonp请求封装，它们通过通过动态创建script标签来实现，我们可以直接调用。jsonp方式兼容所有的浏览器，但是只支持get请求。</p>
-</li>
-<li><p><font color="red">方法三：XHR2（了解即可）</font><br>HTML5提供的XMLHttpRequest Level 2已经实现了跨域访问以及其他的一些新功能<br>这需要在远程服务器端添加如下代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;Access-Control-Allow-Origin:*&apos;); //*代表可访问的地址，可以设置指定域名</span><br><span class="line">header(&apos;Access-Control-Allow-Methods:POST,GET&apos;); </span><br><span class="line">这样在客户端使用常规的AJAX代码即可。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>因为IE10以下版本的浏览器都不支持，在最近的几年可能不会大量的使用，或许以后会火起来吧</p>
-
+        <p>简述ajax的跨域问题<br>
+        
       
 
       
@@ -847,19 +820,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
               </li>
             
             <div class="clearfix"></div>
