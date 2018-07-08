@@ -153,6 +153,159 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ajax跨域问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/12/ajax跨域问题/">ajax跨域问题</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/12/ajax跨域问题/" class="archive-article-date">
+  	<time datetime="2018-05-12T02:58:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<p>什么是跨域</p>
+<p>概念：只要协议、域名、端口有任何一个不同，都被当作是不同的域。而跨域是指从一个域名的网页去请求另一个域名的资源。例如从<code>www.baidu.com</code>页面请求<code>www.bing.com</code>的资源就被视为跨域。而因为浏览器的同源策略，会对跨域请求进行限制于是就有了跨域问题的出现。同源，指的是协议、域名、端口号都必须完全相同</p>
+<p>跨域的处理</p>
+<ul>
+<li><font color="red">方法一：服务器代理</font>
+
+<p>  因为限制只存在于浏览器中，在其他环境下是不存在的，服务器中中自然也不存在，所以只需要在服务器做好请求代理，请求变成同源的自然就不存在问题了。</p>
+</li>
+<li><font color="red">方法二：jsonp</font>
+
+<p>  虽然浏览器有同源限制，但是有三个标签是不符合这种限制的<code>&lt;img&gt;</code>的src（获取图片），<code>&lt;link&gt;</code>的href（获取css），<code>&lt;script&gt;</code>的src（获取javascript），这是由他们的自身特性所决定的。而jsonp，就是利用了script标签不限制同源的特点来实现的。</p>
+<p>  小例子：百度搜索框(边输入边提示)效果    &darr;    &darr;    &darr;</p>
+<p>  <img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/search.jpg" alt="百度搜索"></p>
+<p>  布局</p>
+<p>  只需要一个<code>ul</code>即可，其他全部通过代码动态添加</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"input"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  js代码</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">           <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line">           <span class="keyword">var</span> html = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> (data.s.length) &#123;</span><br><span class="line">               list.style.display = <span class="string">'block'</span>;</span><br><span class="line">               <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.s.length; i++) &#123;</span><br><span class="line">                   html += <span class="string">'&lt;li&gt;'</span> + data.s[i] + <span class="string">'&lt;/li&gt;'</span></span><br><span class="line">               &#125;</span><br><span class="line">               list.innerHTML = html;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'input'</span>);</span><br><span class="line">           <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line"></span><br><span class="line">           input.onkeyup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">//判断输入框不为空时创建script标签，并把请求的接口文件写入src</span></span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">''</span>) &#123;</span><br><span class="line">                   <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">                   script.src = <span class="string">'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='</span> + input.value + <span class="string">'&amp;cb=fn'</span>;</span><br><span class="line">                   <span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   list.style.display = <span class="string">'none'</span></span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>  效果&darr;    &darr;    &darr;</p>
+<p>  <img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/xiaog.png" alt="最终效果"></p>
+<p>  jsonp是一种常用的跨域方式，目前有很多前端的jsonp请求封装，它们通过通过动态创建script标签来实现，我们可以直接调用。jsonp方式兼容所有的浏览器，但是只支持get请求。</p>
+</li>
+<li><p><font color="red">方法三：XHR2（了解即可）</font><br>HTML5提供的XMLHttpRequest Level 2已经实现了跨域访问以及其他的一些新功能<br>这需要在远程服务器端添加如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;Access-Control-Allow-Origin:*&apos;); //*代表可访问的地址，可以设置指定域名</span><br><span class="line">header(&apos;Access-Control-Allow-Methods:POST,GET&apos;); </span><br><span class="line">这样在客户端使用常规的AJAX代码即可。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>因为IE10以下版本的浏览器都不支持，在最近的几年可能不会大量的使用，或许以后会火起来吧</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/12/ajax跨域问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-javaScript轮播图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/08/javaScript轮播图/">javaScript轮播图</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/08/javaScript轮播图/" class="archive-article-date">
+  	<time datetime="2018-04-08T02:34:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>随便写的轮播，可能会有bug和多余的代码，暂时没有做到无缝<br>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/08/javaScript轮播图/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Windows下的实用软件推荐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -173,136 +326,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="系统工具"><a href="#系统工具" class="headerlink" title="系统工具"></a>系统工具</h2><table>
-<thead>
-<tr>
-<th>软件类型</th>
-<th>软件名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>桌面美化</td>
-<td><a href="http://store.steampowered.com/app/431960/Wallpaper_Engine/" target="_blank" rel="noopener">Wallpaper Engine</a></td>
-<td>最好的动态桌面(没有之一)，搭配创意工坊简直无敌了</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td><a href="http://huoying666.com/" target="_blank" rel="noopener">火萤</a></td>
-<td>也是动态桌面，可以免费下载</td>
-</tr>
-<tr>
-<td></td>
-<td><a href="https://www.rainmeter.net/" target="_blank" rel="noopener">Rainmeter</a></td>
-<td>资源丰富的桌面美化软件</td>
-</tr>
-<tr>
-<td></td>
-<td><a href="http://www.gpbeta.com/post/develop/sao-utils/" target="_blank" rel="noopener">SAO Utils</a></td>
-<td>最炫酷的SAO启动菜单(适合装13)</td>
-</tr>
-<tr>
-<td>文件搜索</td>
-<td><a href="https://www.voidtools.com/" target="_blank" rel="noopener">Everything</a></td>
-<td>搜索整个硬盘只需几秒</td>
-</tr>
-<tr>
-<td></td>
-<td><a href="http://www.listary.com/" target="_blank" rel="noopener">listary</a></td>
-<td>不仅能搜索文件，也可以搜程序</td>
-</tr>
-<tr>
-<td></td>
-<td><a href="http://www.getwox.com/" target="_blank" rel="noopener">Wox</a></td>
-<td>与Everything搭配最完美，能直接打开超链接</td>
-</tr>
-<tr>
-<td>截图软件</td>
-<td><a href="http://www.faststone.org/FSCaptureDetail.htm" target="_blank" rel="noopener">FSCapture</a></td>
-<td>能截图、能录屏，非常强大</td>
-</tr>
-<tr>
-<td>远程控制</td>
-<td><a href="https://www.teamviewer.com/Zhcn/" target="_blank" rel="noopener">TeamViewer</a></td>
-<td>简单实用</td>
-</tr>
-<tr>
-<td>下载软件</td>
-<td><a href="http://www.freedownloadmanager.org/download.htm" target="_blank" rel="noopener">Free Download Manager</a></td>
-<td>无广告，下载速度也不错，是替代迅雷的不错选择</td>
-</tr>
-<tr>
-<td></td>
-<td><a href="http://rj.baidu.com/soft/detail/26860.html" target="_blank" rel="noopener">迅雷极速版</a></td>
-<td>官方已不更新，不登陆也不会限制下载速度</td>
-</tr>
-<tr>
-<td></td>
-<td><a href="http://download.cnet.com/ccleaner/?part=dl-&amp;subj=dl&amp;tag=button" target="_blank" rel="noopener">CCleaner</a></td>
-<td>系统维护软件，可用来清理垃圾、注册表</td>
-</tr>
-<tr>
-<td>压缩软件</td>
-<td><a href="http://7-zip.org/" target="_blank" rel="noopener">7-zip</a></td>
-<td>非常高效的压缩解压软件</td>
-</tr>
-<tr>
-<td>梯子</td>
-<td><a href="https://github.com/XX-net/XX-Net/blob/master/code/default/download.md" target="_blank" rel="noopener">xx-net</a></td>
-<td>配合chrome的梯子神器</td>
-</tr>
-</tbody>
-</table>
-<h2 id="多媒体"><a href="#多媒体" class="headerlink" title="多媒体"></a>多媒体</h2><table>
-<thead>
-<tr>
-<th>软件类型</th>
-<th>软件名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>视频播放</td>
-<td><a href="http://potplayer.daum.net/?lang=zh_CN" target="_blank" rel="noopener">Potplayer</a></td>
-<td>简洁UI，丰富功能</td>
-</tr>
-<tr>
-<td>音乐播放</td>
-<td><a href="http://http://music.163.com/" target="_blank" rel="noopener">网易云音乐</a></td>
-<td>丰富的歌单，人性的交互</td>
-</tr>
-<tr>
-<td>视频格式</td>
-<td><a href="https://www.rainmeter.net/" target="_blank" rel="noopener">Rainmeter</a></td>
-<td>支持格式丰富，使用方便</td>
-</tr>
-</tbody>
-</table>
-<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><table>
-<thead>
-<tr>
-<th>软件类型</th>
-<th>软件名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>浏览器</td>
-<td><a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank" rel="noopener">Chrome</a></td>
-<td>不需要说太多什么</td>
-</tr>
-<tr>
-<td></td>
-<td><a href="http://www.firefox.com.cn/download/" target="_blank" rel="noopener">Firefox</a></td>
-<td>也是不需要说太多什么</td>
-</tr>
-</tbody>
-</table>
-
+        <p>推荐一些常用的软件，适用于windows<br>
+        
       
 
       
@@ -822,19 +847,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
             
             <div class="clearfix"></div>

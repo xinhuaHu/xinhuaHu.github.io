@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: PHP | xinhuaHu的网站</title>
+  <title>ajax跨域问题 | xinhuaHu的网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="xinhuaHu的网站">
-<meta property="og:url" content="http://yoursite.com/tags/PHP/index.html">
+  <meta name="description" content="什么是跨域 概念：只要协议、域名、端口有任何一个不同，都被当作是不同的域。而跨域是指从一个域名的网页去请求另一个域名的资源。例如从www.baidu.com页面请求www.bing.com的资源就被视为跨域。而因为浏览器的同源策略，会对跨域请求进行限制于是就有了跨域问题的出现。同源，指的是协议、域名、端口号都必须完全相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax跨域问题">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/ajax跨域问题/index.html">
 <meta property="og:site_name" content="xinhuaHu的网站">
+<meta property="og:description" content="什么是跨域 概念：只要协议、域名、端口有任何一个不同，都被当作是不同的域。而跨域是指从一个域名的网页去请求另一个域名的资源。例如从www.baidu.com页面请求www.bing.com的资源就被视为跨域。而因为浏览器的同源策略，会对跨域请求进行限制于是就有了跨域问题的出现。同源，指的是协议、域名、端口号都必须完全相同 跨域的处理  方法一：服务器代理    因为限制只存在于浏览器中，在其他环">
+<meta property="og:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/search.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/xiaog.png">
+<meta property="og:updated_time" content="2018-07-08T03:22:18.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xinhuaHu的网站">
+<meta name="twitter:title" content="ajax跨域问题">
+<meta name="twitter:description" content="什么是跨域 概念：只要协议、域名、端口有任何一个不同，都被当作是不同的域。而跨域是指从一个域名的网页去请求另一个域名的资源。例如从www.baidu.com页面请求www.bing.com的资源就被视为跨域。而因为浏览器的同源策略，会对跨域请求进行限制于是就有了跨域问题的出现。同源，指的是协议、域名、端口号都必须完全相同 跨域的处理  方法一：服务器代理    因为限制只存在于浏览器中，在其他环">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/search.jpg">
   
     <link rel="alternative" href="/atom.xml" title="xinhuaHu的网站" type="application/atom+xml">
   
@@ -151,64 +158,173 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-ajax跨域问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/14/ubuntu16-04-PHP的简单配置/" class="archive-article-date">
-  	<time datetime="2017-12-14T14:07:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/14/ubuntu16-04-PHP的简单配置/">Ubuntu16.04 PHP的简单配置</a>
+    <h1 class="article-title" itemprop="name">
+      ajax跨域问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2018/05/12/ajax跨域问题/" class="archive-article-date">
+  	<time datetime="2018-05-12T02:58:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<p>什么是跨域</p>
+<p>概念：只要协议、域名、端口有任何一个不同，都被当作是不同的域。而跨域是指从一个域名的网页去请求另一个域名的资源。例如从<code>www.baidu.com</code>页面请求<code>www.bing.com</code>的资源就被视为跨域。而因为浏览器的同源策略，会对跨域请求进行限制于是就有了跨域问题的出现。同源，指的是协议、域名、端口号都必须完全相同</p>
+<p>跨域的处理</p>
+<ul>
+<li><font color="red">方法一：服务器代理</font>
 
-          
+<p>  因为限制只存在于浏览器中，在其他环境下是不存在的，服务器中中自然也不存在，所以只需要在服务器做好请求代理，请求变成同源的自然就不存在问题了。</p>
+</li>
+<li><font color="red">方法二：jsonp</font>
 
+<p>  虽然浏览器有同源限制，但是有三个标签是不符合这种限制的<code>&lt;img&gt;</code>的src（获取图片），<code>&lt;link&gt;</code>的href（获取css），<code>&lt;script&gt;</code>的src（获取javascript），这是由他们的自身特性所决定的。而jsonp，就是利用了script标签不限制同源的特点来实现的。</p>
+<p>  小例子：百度搜索框(边输入边提示)效果    &darr;    &darr;    &darr;</p>
+<p>  <img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/search.jpg" alt="百度搜索"></p>
+<p>  布局</p>
+<p>  只需要一个<code>ul</code>即可，其他全部通过代码动态添加</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"input"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  js代码</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">           <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line">           <span class="keyword">var</span> html = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> (data.s.length) &#123;</span><br><span class="line">               list.style.display = <span class="string">'block'</span>;</span><br><span class="line">               <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.s.length; i++) &#123;</span><br><span class="line">                   html += <span class="string">'&lt;li&gt;'</span> + data.s[i] + <span class="string">'&lt;/li&gt;'</span></span><br><span class="line">               &#125;</span><br><span class="line">               list.innerHTML = html;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'input'</span>);</span><br><span class="line">           <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>);</span><br><span class="line"></span><br><span class="line">           input.onkeyup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">//判断输入框不为空时创建script标签，并把请求的接口文件写入src</span></span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">''</span>) &#123;</span><br><span class="line">                   <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">                   script.src = <span class="string">'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='</span> + input.value + <span class="string">'&amp;cb=fn'</span>;</span><br><span class="line">                   <span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   list.style.display = <span class="string">'none'</span></span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>  效果&darr;    &darr;    &darr;</p>
+<p>  <img src="https://raw.githubusercontent.com/xinhuaHu/MarkDownPic/master/Res/Blog/xiaog.png" alt="最终效果"></p>
+<p>  jsonp是一种常用的跨域方式，目前有很多前端的jsonp请求封装，它们通过通过动态创建script标签来实现，我们可以直接调用。jsonp方式兼容所有的浏览器，但是只支持get请求。</p>
+</li>
+<li><p><font color="red">方法三：XHR2（了解即可）</font><br>HTML5提供的XMLHttpRequest Level 2已经实现了跨域访问以及其他的一些新功能<br>这需要在远程服务器端添加如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;Access-Control-Allow-Origin:*&apos;); //*代表可访问的地址，可以设置指定域名</span><br><span class="line">header(&apos;Access-Control-Allow-Methods:POST,GET&apos;); </span><br><span class="line">这样在客户端使用常规的AJAX代码即可。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>因为IE10以下版本的浏览器都不支持，在最近的几年可能不会大量的使用，或许以后会火起来吧</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/12/ajax跨域问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/08/javaScript轮播图/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javaScript轮播图</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2018/05/12/ajax跨域问题/", 
+    sourceId: "ajax跨域问题",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -231,9 +347,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
