@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+.clearfix:after,.clearfix:before{
+    content: '';
+    display: table;
+    clear: both;
+}
+.fl{
+    float: left;
+}
+
+.fr{
+    float: right;
+}
